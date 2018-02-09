@@ -1,0 +1,41 @@
+
+<html>
+  <head>
+    <title>Go #HOKIES!</title>
+
+    <!-- BOOTSTRAP 4 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style type="text/css">
+      a {color:#600;}
+      a:hover {color:#c50;}
+    </style>
+  </head>
+
+  <body>
+    <div class="container" id="app">
+      <h3 class="border-bottom my-4 pb-2">Hokie Headlines</h3>
+      <div class="card-columns">
+        <div class="card" v-for="result in results" v-if="result.source.name != 'Linux.com' && result.source.name != 'APNEWSARCHIVE.COM' && result.source.name != 'Richmond.com'">
+          <img class="card-img-top" v-bind:src="result.urlToImage" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"><a v-bind:href="result.url">{{ result.title }}</a></h5>
+            <small class="text-uppercase text-muted">{{ result.source.name }}</small>
+            <p class="card-text">{{ result.description }}.</p>
+          </div>
+          <div class="card-footer">
+            {{ result.publishedAt }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VUE JS -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+    <!-- AXIOS JS -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- CUSTOM VUE -->
+    <script src="app.js"></script>
+  </body>
+</html>
