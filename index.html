@@ -6,24 +6,48 @@
     <!-- BOOTSTRAP 4 CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style type="text/css">
-      a {color:#600;}
-      a:hover {color:#c50;}
+      a {color:#8A1E41;}
+      a:hover {color:#EE7623;}
+      .navbar-dark {background-color:#8A1E41 !important;}
+      .text-orange {color:#EE7623;}
     </style>
   </head>
 
   <body>
-    <div class="container" id="app">
-      <h3 class="border-bottom my-4 pb-2">Hokie Headlines</h3>
-      <div class="card-columns">
-        <div class="card" v-for="result in results" v-if="result.source.name != 'Linux.com' && result.source.name != 'APNEWSARCHIVE.COM' && result.source.name != 'Richmond.com'">
-          <img class="card-img-top" v-bind:src="result.urlToImage" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title"><a v-bind:href="result.url">{{ result.title }}</a></h5>
-            <small class="text-uppercase text-muted">{{ result.source.name }}</small>
-            <p class="card-text">{{ result.description }}.</p>
+    <div id="app">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <span class="navbar-brand">Hokie Headlines <small class="text-orange ml-2">{{ selected }}</small></span>
+
+        <div class="collapse navbar-collapse justify-content-end">
+          <div class="form-inline my-2 my-lg-0">
+            <span class="text-orange mr-2">Filter by Sport</span>
+            <select class="form-control mr-sm-2" v-model="selected" v-on:change="onChange">
+              <option selected>All Hokie Sports</option>
+              <option>Football</option>
+              <option>Basketball</option>
+              <option>Wrestling</option>
+              <option>Volleyball</option>
+              <option>Baseball</option>
+              <option>Softball</option>
+              <option>Track</option>
+              <option>Swimming</option>
+              <option>Soccer</option>
+            </select>
           </div>
-          <div class="card-footer">
-            {{ result.publishedAt }}
+        </div>
+      </nav>
+      <div class="container mt-2">
+        <div class="card-columns">
+          <div class="card" v-for="result in results" v-if="result.source.name != 'Linux.com' && result.source.name != 'APNEWSARCHIVE.COM' && result.source.name != 'Richmond.com'">
+            <img class="card-img-top" v-bind:src="result.urlToImage" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"><a v-bind:href="result.url" target="_blank">{{ result.title }}</a></h5>
+              <small class="text-uppercase text-muted">{{ result.source.name }}</small>
+              <p class="card-text">{{ result.description }}.</p>
+            </div>
+            <div class="card-footer">
+              {{ result.publishedAt }}
+            </div>
           </div>
         </div>
       </div>
